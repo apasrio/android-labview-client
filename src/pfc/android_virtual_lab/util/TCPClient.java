@@ -7,8 +7,12 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class TCPClient	{
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	
+	private static final String TAG = "TcpCommunication";
 	//Socket parameters
 	private static Socket clientSocket;
 	static int receivedMessageLength, receivedMessageType;
@@ -16,14 +20,8 @@ public class TCPClient	{
 	static DataOutputStream outToServer; 
 	static BufferedReader inFromServer; 
 	
-	
-	public TCPClient(String IP, int port) throws UnknownHostException, IOException{
-		// Handling the DataStreams
-		TCPClient.clientSocket = new Socket(IP, port);
-		this.outToServer = new DataOutputStream(getClientSocket().getOutputStream());
-		this.inFromServer = new BufferedReader(new InputStreamReader(getClientSocket().getInputStream()));
-		// Constants about Header and Message
-	}
+	public TCPClient(){		
+	}	
 	
 	/*
 	 * Method to send a message to the server and wait for an answer
@@ -163,4 +161,35 @@ public class TCPClient	{
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
 	}
+
+	@Override
+	protected Integer doInBackground(String... params) {		
+		
+		try {
+			TCPClient.clientSocket = new Socket(Constants.SocketIp, Constants.SocketPort);
+			this.outToServer = new DataOutputStream(getClientSocket().getOutputStream());
+			this.inFromServer = new BufferedReader(new InputStreamReader(getClientSocket().getInputStream()));
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		if (params[0].equals((String)Constants.ESTABLISH_CONNECTION)){
+			Log.d(TAG, "Trying to connect the server!!");
+			try {
+				establishComm(Constants.SocketIp);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (params[0].equals((String) Constants.BIDIRECT_COMMUNICATION)){
+			Log.d(TAG, "BidirectComm has been called!!");
+		}
+		return null;
+	}
+
 }
