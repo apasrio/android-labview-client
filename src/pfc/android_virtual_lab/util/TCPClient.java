@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-class TCPClient	{
+public class TCPClient	{
 	
 	//Socket parameters
 	private static Socket clientSocket;

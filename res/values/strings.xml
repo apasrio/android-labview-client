@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Virtual Lab</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="connect_button">Connect!!</string>
+    <string name="welcome_content">Welcome Message</string>
 
 </resources>
