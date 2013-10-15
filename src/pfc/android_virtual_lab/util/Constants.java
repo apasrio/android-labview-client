@@ -1,7 +1,7 @@
 package pfc.android_virtual_lab.util;
 
 public class Constants {
-	public final static String SocketIp = "127.0.0.1";
+	public final static String SocketIp = "192.168.1.4";
 	public final static int SocketPort = 5020;
 	
 	// Messages and Types

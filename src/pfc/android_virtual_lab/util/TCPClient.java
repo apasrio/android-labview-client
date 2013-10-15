@@ -7,8 +7,11 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import pfc.android_virtual_lab.Globals;
+import pfc.android_virtual_lab.MainActivity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	
@@ -19,8 +22,10 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	// Handling the DataStreams
 	static DataOutputStream outToServer; 
 	static BufferedReader inFromServer; 
+	private TextView errMsg;
 	
-	public TCPClient(){		
+	public TCPClient(TextView errMsg){
+		this.errMsg = errMsg;
 	}	
 	
 	/*
@@ -74,14 +79,16 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 			receivedHeader = readHeader(inFromServer);
 			decodeHeader(receivedHeader);
 			// Read Server Response in order to know its status
+			
 			receivedMessage = readMessage(receivedMessageLength, inFromServer);
 			if(receivedMessageType==4){
 				// Connection in good health
-				System.out.println("Connection established succesfully");
-				System.out.println(receivedMessage);				
+				Log.d(TAG, "Connection established succesfully");
+				Log.d(TAG, receivedMessage);								
 			} else if (receivedMessageType==5){
 				// There has been a problem with the server side
-				System.out.println("Error while connection stablishment");
+				Log.d(TAG, "Error while connection stablishment");
+				Log.d(TAG, receivedMessage);
 				System.out.println(receivedMessage);
 				// Sending response to close communication				
 			}
@@ -147,6 +154,12 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		
 		System.out.println("Decoded Header Length: " + receivedMessageLength + "\n Decoded Header Type: " + receivedMessageType);		
 	}
+	
+	private String[] decodeAvailableDevicesQuery(String receivedMessage){
+		String[] decodedQuery;
+		decodedQuery = receivedMessage.split(",");
+		return decodedQuery;
+	}
 
 
 	public static void close() throws IOException {
@@ -161,9 +174,10 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
 	}
-
+	
 	@Override
-	protected Integer doInBackground(String... params) {		
+	protected Integer doInBackground(String... params) {	
+		int code = 0;
 		
 		try {
 			TCPClient.clientSocket = new Socket(Constants.SocketIp, Constants.SocketPort);
@@ -181,15 +195,60 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		if (params[0].equals((String)Constants.ESTABLISH_CONNECTION)){
 			Log.d(TAG, "Trying to connect the server!!");
 			try {
-				establishComm(Constants.SocketIp);
+				code = establishComm(Constants.SocketIp);
+				if (code == 4){
+					String[] receivedData;
+					receivedData = bidirectComm(Constants.AVAILABLE_FIELD,
+							Constants.AVAILABLE_DEVICES_QUERY);
+					
+					receivedData = decodeAvailableDevicesQuery(receivedData[1]);
+					Log.d(TAG, "AG33220A is -> " + receivedData[0]);
+					Log.d(TAG, "HP33120A is -> " + receivedData[1]);
+					Log.d(TAG, "HP34401A is -> " + receivedData[2]);
+					Log.d(TAG, "HP54602B is -> " + receivedData[3]);
+					
+					if(receivedData[0].equals("1"))
+						Globals.AG33220aStatus = true;
+					if(receivedData[1].equals("1"))
+						Globals.HP33120aStatus = true;
+					if(receivedData[2].equals("1"))
+						Globals.HP34401aStatus = true;
+					if(receivedData[3].equals("1"))
+						Globals.HP54602bStatus = true;
+					
+					
+				} else if (code == 5){
+					Log.d(TAG, "Server is Busy!!! Try again later! ");
+				} else{
+					Log.d(TAG, "Unknown Error!! Try again later! ");
+				}
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (params[0].equals((String) Constants.BIDIRECT_COMMUNICATION)){
 			Log.d(TAG, "BidirectComm has been called!!");
 		}
-		return null;
-	}
+		return code;
+	}	
+
+	
+	@Override
+	protected void onPostExecute(Integer result) {
+		Log.d(TAG, "Finished establishing communication process");		
+		// Here we are going to update the UI
+		if(result == 4){
+			// Everything was ok, so we need to launch a new activity
+		} else if (result == 5){
+			// Server is busy
+			errMsg.setText("Server is Busy!!! Try again later! ");
+		} else {
+			// Unknown error
+			errMsg.setText("Unknown Error!! Try again later!");
+		}
+    }
 
 }

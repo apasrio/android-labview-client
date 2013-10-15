@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	
+
 	private final static String TAG = "MainActivity";
+	private TextView errorMsg;
+	
 	TCPClient clientSocket = null;
 
 	@Override
@@ -22,19 +24,20 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main_activity);
-		
-		final TextView errorMsg = (TextView) findViewById(R.id.connectionError);
+
+		errorMsg = (TextView) findViewById(R.id.connectionError);
 		final View contentView = findViewById(R.id.fullscreen_content);	
 		final Button connectButton = (Button) findViewById(R.id.dummy_button);
-		
+
 		// Set up the user interaction to manually show or hide the system UI.
 		connectButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				int connectionCode = 0;				
-				new TCPClient().execute(Constants.ESTABLISH_CONNECTION);
-					//clientSocket = new TCPClient(Constants.SocketIp, Constants.SocketPort);
-					//connectionCode = TCPClient.establishComm(Constants.SocketIp);
+				new TCPClient(errorMsg).execute(Constants.ESTABLISH_CONNECTION);
+				//clientSocket = new TCPClient(Constants.SocketIp, Constants.SocketPort);
+				//connectionCode = TCPClient.establishComm(Constants.SocketIp);
+				Log.d(TAG, "Connection Process Executed!");
 				if(connectionCode == 4){
 					// Everything has been fine, so we need to know what devices are available
 					errorMsg.setVisibility(View.INVISIBLE);
@@ -42,14 +45,12 @@ public class MainActivity extends Activity {
 						String[] receivedData;
 						receivedData = TCPClient.bidirectComm(Constants.AVAILABLE_FIELD,
 								Constants.AVAILABLE_DEVICES_QUERY);
-						
-						receivedData = decodeAvailableDevicesQuery(receivedData[1]);
-						
+
 						Log.d(TAG, "AG33220A is -> " + receivedData[0]);
 						Log.d(TAG, "HP33120A is -> " + receivedData[1]);
 						Log.d(TAG, "HP34401A is -> " + receivedData[2]);
 						Log.d(TAG, "HP54602B is -> " + receivedData[3]);
-						
+
 						// Then we need to launch next Activity with the devices configured
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -68,11 +69,5 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-	}
-	
-	private String[] decodeAvailableDevicesQuery(String receivedMessage){
-		String[] decodedQuery;
-		decodedQuery = receivedMessage.split(",");
-		return decodedQuery;
-	}
+	}	
 }
