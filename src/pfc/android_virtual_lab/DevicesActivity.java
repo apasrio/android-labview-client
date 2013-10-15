@@ -77,6 +77,9 @@ public class DevicesActivity extends FragmentActivity {
 			case 0:
 				fragment = new AG33120aFragment();				
 				break;
+			case 1:
+				fragment = new HP33120aFragment();
+				break;
 			default:
 				fragment = new DummySectionFragment();
 				Bundle args = new Bundle();

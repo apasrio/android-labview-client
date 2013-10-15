@@ -1,6 +1,5 @@
 package pfc.android_virtual_lab;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,25 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class AG33120aFragment extends Fragment{
+public class HP33120aFragment extends Fragment{
 	
 	private Spinner wfmShape, unit;
 	
 	
-	public AG33120aFragment(){
-		
-	}
-	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){		
-		View rootView = inflater.inflate(R.layout.fragment_ag33220a,
+		View rootView = inflater.inflate(R.layout.fragment_hp33120a,
 				container, false);
 		// Getting arguments
 		
 		// Let's populate spinners
-		wfmShape = (Spinner) rootView.findViewById(R.id.ag33220WfmShape);
-		unit = (Spinner) rootView.findViewById(R.id.ag33220Unit);
+		wfmShape = (Spinner) rootView.findViewById(R.id.hp33120aWaveform);
+		unit = (Spinner) rootView.findViewById(R.id.hp33120aUnit);
 		
 		ArrayAdapter<CharSequence> waveformAdapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.waveform_shape, android.R.layout.simple_spinner_item);
@@ -44,4 +38,5 @@ public class AG33120aFragment extends Fragment{
 		
 		return rootView;
 	}
+
 }
