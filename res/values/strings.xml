@@ -4,10 +4,38 @@
     <string name="app_name">Virtual Lab</string>
     <string name="connect_button">Connect!!</string>
     <string name="welcome_content">Welcome Message</string>
+    <string name="waveform_shape">Waveform Shape:</string>
     <string name="title_activity_devices">Devices</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">AG33220A - WFG</string>
+    <string name="title_section2">HP33120A - WFG</string>
+    <string name="title_section3">HP34401A - DMM</string>
+    <string name="title_section4">HP54602B - Scope</string>
+    
+    <string-array name="waveform_shape">
+        <item>DC</item>
+        <item>Sine</item>
+        <item>Square</item>
+        <item>Triangle</item>
+        <item>Ramp</item>
+        <item>Pulse</item>
+        <item>Noise</item>
+        <item>Sinc</item>
+        <item>Neg. Ramp</item>
+        <item>Exp. Rise</item>
+        <item>Exp. Fall</item>
+    </string-array>
+    <string-array name="units">
+        <item>Vpp</item>
+        <item>Vrms</item>
+        <item>dB</item>
+    </string-array>
+    <string name="unit">Unit:</string>
+    <string name="frequency">Frequency (Hz):</string>
+    <string name="amplitude">Amplitude (Vpp):</string>
+    <string name="offset">Offset (Vdc):</string>
+    <string name="ramp_symmetry">Ramp Symmetry (%):</string>
+    <string name="duty_cycle">Duty Cycle (%) Sq:</string>
+    <string name="duty_cycle_pulse">Duty Cycle (%) Puls:</string>
 
 </resources>

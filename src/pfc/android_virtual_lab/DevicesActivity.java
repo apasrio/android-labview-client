@@ -72,17 +72,25 @@ public class DevicesActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
+			Fragment fragment;
+			switch(position){
+			case 0:
+				fragment = new AG33120aFragment();				
+				break;
+			default:
+				fragment = new DummySectionFragment();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				break;
+			}
 			return fragment;
 		}
 
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 4;
 		}
 
 		@Override
@@ -95,6 +103,8 @@ public class DevicesActivity extends FragmentActivity {
 				return getString(R.string.title_section2).toUpperCase(l);
 			case 2:
 				return getString(R.string.title_section3).toUpperCase(l);
+			case 3:
+				return getString(R.string.title_section4).toUpperCase(l);
 			}
 			return null;
 		}
