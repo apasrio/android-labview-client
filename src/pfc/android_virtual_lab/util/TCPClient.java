@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import pfc.android_virtual_lab.DevicesActivity;
 import pfc.android_virtual_lab.Globals;
-import pfc.android_virtual_lab.MainActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -23,9 +25,11 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	static DataOutputStream outToServer; 
 	static BufferedReader inFromServer; 
 	private TextView errMsg;
+	private Context context;
 	
-	public TCPClient(TextView errMsg){
+	public TCPClient(Context context, TextView errMsg){
 		this.errMsg = errMsg;
+		this.context = context;
 	}	
 	
 	/*
@@ -242,6 +246,9 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		// Here we are going to update the UI
 		if(result == 4){
 			// Everything was ok, so we need to launch a new activity
+			Intent intent = new Intent(context, DevicesActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
 		} else if (result == 5){
 			// Server is busy
 			errMsg.setText("Server is Busy!!! Try again later! ");
