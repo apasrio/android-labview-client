@@ -30,6 +30,30 @@
         <item>Vrms</item>
         <item>dB</item>
     </string-array>
+    <string-array name="dmm_functions">
+        <item>DC Voltage</item>
+        <item>AC Voltage</item>
+        <item>2 - Wire Resistance</item>
+        <item>4 - Wire Resistance</item>
+        <item>DC Current</item>
+        <item>AC Current</item>
+        <item>Frequency</item>
+        <item>Period</item>
+        <item>Continuity</item>
+        <item>Diode Checking</item>
+        <item>VDC Ratio</item>
+    </string-array>
+    <string-array name="dmm_resolution">
+        <item>4.5</item>
+        <item>5.5</item>
+        <item>6.5</item>
+    </string-array>
+    <string-array name="dmm_trigger_source">
+        <item>Immediate</item>
+        <item>Software(Bus)</item>
+        <item>External</item>
+        <item>Internal</item>
+    </string-array>
     <string name="unit">Unit:</string>
     <string name="frequency">Frequency (Hz):</string>
     <string name="amplitude">Amplitude (Vpp):</string>
@@ -37,5 +61,53 @@
     <string name="ramp_symmetry">Ramp Symmetry (%):</string>
     <string name="duty_cycle">Duty Cycle (%) Sq:</string>
     <string name="duty_cycle_pulse">Duty Cycle (%) Puls:</string>
+    <string name="function">Function:</string>
+    <string name="resolution">Resolution:</string>
+    <string name="trigger_source">Trigger Src:</string>
+    <string name="manual_range">Manual Range:</string>
+    <string name="autozero">Auto-Zero</string>
+    <string name="auto_range">Auto-Range</string>
+    <string name="measure">Measure:</string>
+    <string name="channel1">Channel 1</string>
+    <string name="channel2">Channel 2</string>
+    <string name="ch1">CH 1</string>
+    <string name="ch2">CH2</string>
+    <string name="coupling">Coupling:</string>
+    <string name="probe">Probe:</string>
+    <string name="range">Range:</string>
+    <string name="position">Position:</string>
+    <string name="autoset">Autoset</string>
+    <string name="delay">Delay:</string>
+    <string name="trigger_level">Trigger Lvl:</string>
+    <string-array name="oscilloscope_functions">
+        <item>Vpp</item>
+        <item>Vaverage</item>
+        <item>Vrms</item>
+        <item>Vmax</item>
+        <item>Vmin</item>
+        <item>Vtop</item>
+        <item>Vbase</item>
+        <item>Frequency</item>
+        <item>Period</item>
+        <item>Duty Cycle</item>
+        <item>Pos. Width</item>
+        <item>Neg. Width</item>
+        <item>Rise Time</item>
+        <item>Fall Time</item>
+    </string-array>
+    <string-array name="oscilloscope_coupling">
+        <item>DC</item>
+        <item>AC</item>
+        <item>GND</item>
+    </string-array>
+    <string-array name="oscilloscope_probe">
+        <item>1X</item>
+        <item>10X</item>
+        <item>100X</item>
+    </string-array>
+    <string-array name="oscilloscope_trigger_src">
+        <item>Channel 1</item>
+        <item>Channel 2</item>
+    </string-array>
 
 </resources>

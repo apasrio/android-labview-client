@@ -80,6 +80,12 @@ public class DevicesActivity extends FragmentActivity {
 			case 1:
 				fragment = new HP33120aFragment();
 				break;
+			case 2:
+				fragment = new HP34401aFragment();
+				break;
+			case 3:
+				fragment = new HP54602bFragment();
+				break;
 			default:
 				fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
