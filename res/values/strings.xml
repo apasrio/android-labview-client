@@ -109,5 +109,6 @@
         <item>Channel 1</item>
         <item>Channel 2</item>
     </string-array>
+        <string name="do_it">Do it!</string>
 
 </resources>
