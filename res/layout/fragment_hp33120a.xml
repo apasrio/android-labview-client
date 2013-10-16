@@ -58,7 +58,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/hp34401a_range"
+            android:id="@+id/hp33120a_frequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -82,7 +82,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/hp33120a_amplitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -103,7 +103,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/hp33120a_offset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -124,7 +124,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/hp33120a_duty_cycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/configButton"
+            android:id="@+id/hp33120a_configButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

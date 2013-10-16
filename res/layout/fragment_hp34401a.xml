@@ -81,7 +81,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/hp34401a_range"
+            android:id="@+id/hp34401a_manual_range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -131,7 +131,22 @@
         <TextView
             android:id="@+id/hp34401a_measure"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/hp34401a_config_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/do_it" />
 
     </TableRow>
 

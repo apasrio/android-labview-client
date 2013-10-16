@@ -26,6 +26,7 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	static BufferedReader inFromServer; 
 	private TextView errMsg;
 	private Context context;
+	private boolean ag33220aFlag, hp33120aFlag, hp34401aFlag, hp54602bFlag;
 	
 	public TCPClient(Context context, TextView errMsg){
 		this.errMsg = errMsg;
@@ -199,6 +200,10 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		if (params[0].equals((String)Constants.ESTABLISH_CONNECTION)){
 			Log.d(TAG, "Trying to connect the server!!");
 			try {
+				ag33220aFlag = false;
+				hp33120aFlag = false;
+				hp34401aFlag = false;
+				hp54602bFlag = false;
 				code = establishComm(Constants.SocketIp);
 				if (code == 4){
 					String[] receivedData;
@@ -212,13 +217,13 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 					Log.d(TAG, "HP54602B is -> " + receivedData[3]);
 					
 					if(receivedData[0].equals("1"))
-						Globals.AG33220aStatus = true;
+						ag33220aFlag = true;
 					if(receivedData[1].equals("1"))
-						Globals.HP33120aStatus = true;
+						hp33120aFlag = true;
 					if(receivedData[2].equals("1"))
-						Globals.HP34401aStatus = true;
+						hp34401aFlag = true;
 					if(receivedData[3].equals("1"))
-						Globals.HP54602bStatus = true;
+						hp54602bFlag = true;
 					
 					
 				} else if (code == 5){
@@ -247,7 +252,11 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		if(result == 4){
 			// Everything was ok, so we need to launch a new activity
 			Intent intent = new Intent(context, DevicesActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.putExtra(Constants.AG33220A_STATUS, ag33220aFlag);
+			intent.putExtra(Constants.HP33120A_STATUS, hp33120aFlag);
+			intent.putExtra(Constants.HP34401A_STATUS, hp34401aFlag);
+			intent.putExtra(Constants.HP54602B_STATUS, hp54602bFlag);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);			
 			context.startActivity(intent);
 		} else if (result == 5){
 			// Server is busy

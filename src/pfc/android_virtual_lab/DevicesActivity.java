@@ -2,6 +2,8 @@ package pfc.android_virtual_lab;
 
 import java.util.Locale;
 
+import pfc.android_virtual_lab.util.Constants;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,11 +37,20 @@ public class DevicesActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_devices);
+		
+		Bundle extras = getIntent().getExtras();
+		extras.get(Constants.AG33220A_STATUS);
+		extras.get(Constants.HP33120A_STATUS);
+		extras.get(Constants.HP34401A_STATUS);
+		extras.get(Constants.HP54602B_STATUS);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+				getSupportFragmentManager(), extras.getBoolean(Constants.AG33220A_STATUS),
+				extras.getBoolean(Constants.HP33120A_STATUS),
+				extras.getBoolean(Constants.HP34401A_STATUS),
+				extras.getBoolean(Constants.HP54602B_STATUS));
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -59,9 +70,15 @@ public class DevicesActivity extends FragmentActivity {
 	 * one of the sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		boolean ag33220aFlag, hp33120aFlag, hp34401aFlag, hp54602bFlag;
 
-		public SectionsPagerAdapter(FragmentManager fm) {
+		public SectionsPagerAdapter(FragmentManager fm, boolean ag33220a,
+				boolean hp33120a, boolean hp34401a, boolean hp54602b) {
 			super(fm);
+			this.ag33220aFlag = ag33220a;
+			this.hp33120aFlag = hp33120a;
+			this.hp34401aFlag = hp34401a;
+			this.hp54602bFlag = hp54602b;
 		}
 
 		@Override
@@ -72,16 +89,28 @@ public class DevicesActivity extends FragmentActivity {
 			Fragment fragment;
 			switch(position){
 			case 0:
-				fragment = new AG33120aFragment();				
+				fragment = new AG33120aFragment();
+				Bundle device1Args = new Bundle();
+				device1Args.putBoolean(Constants.AG33220A_STATUS, ag33220aFlag);
+				fragment.setArguments(device1Args);
 				break;
 			case 1:
 				fragment = new HP33120aFragment();
+				Bundle device2Args = new Bundle();
+				device2Args.putBoolean(Constants.HP33120A_STATUS, hp33120aFlag);
+				fragment.setArguments(device2Args);
 				break;
 			case 2:
 				fragment = new HP34401aFragment();
+				Bundle device3Args = new Bundle();
+				device3Args.putBoolean(Constants.HP34401A_STATUS, hp34401aFlag);
+				fragment.setArguments(device3Args);
 				break;
 			case 3:
 				fragment = new HP54602bFragment();
+				Bundle device4Args = new Bundle();
+				device4Args.putBoolean(Constants.HP54602B_STATUS, hp54602bFlag);
+				fragment.setArguments(device4Args);
 				break;
 			default:
 				fragment = new DummySectionFragment();

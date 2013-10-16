@@ -155,7 +155,7 @@
             </EditText>
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/ag33220a_amplitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -175,7 +175,7 @@
                 android:text="@string/position" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/hp33120a_offset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -183,7 +183,7 @@
                 android:inputType="numberDecimal" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/hp33120a_duty_cycle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
