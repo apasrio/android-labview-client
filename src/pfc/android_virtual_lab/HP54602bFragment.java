@@ -1,25 +1,55 @@
 package pfc.android_virtual_lab;
 
+import pfc.android_virtual_lab.util.Constants;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 public class HP54602bFragment extends Fragment{
 	
 	private Spinner ch1Function, ch2Function, ch1Coupling, ch2Coupling, ch1Probe, ch2Probe;
 	private Spinner triggerSource;
+	private EditText ch1Range, ch2Range, ch1Position, ch2Position, triggerLvl, timeRange, timeDelay;
+	private ToggleButton ch1Enabler, ch2Enabler, autoset;
+	private Button configButton;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){
 		
 		View rootView = inflater.inflate(R.layout.fragment_hp54602b,
 				container, false);
+		
+		ch1Range = (EditText) rootView.findViewById(R.id.hp54602b_ch1_range);
+		ch1Position = (EditText) rootView.findViewById(R.id.hp54602b_ch1_position);
+		ch2Range = (EditText) rootView.findViewById(R.id.hp54602b_ch2_range);
+		ch2Position = (EditText) rootView.findViewById(R.id.hp54602b_ch2_position);
+		triggerLvl = (EditText) rootView.findViewById(R.id.hpt54602b_trigger_lvl);
+		timeRange = (EditText) rootView.findViewById(R.id.hp54602b_time_range);
+		timeDelay = (EditText) rootView.findViewById(R.id.hp54602b_time_delay);
+		ch1Enabler = (ToggleButton) rootView.findViewById(R.id.hp54602b_ch1_button);
+		ch2Enabler = (ToggleButton) rootView.findViewById(R.id.hp54602b_ch2_button);
+		autoset = (ToggleButton) rootView.findViewById(R.id.hp54602b_autoset);
+		configButton = (Button) rootView.findViewById(R.id.hp54602b_config_button);
+		
+		// Getting arguments
+		boolean flag = getArguments().getBoolean(Constants.HP54602B_STATUS);
 
 		// Let's populate spinners
+		populateSpinners(rootView);
+		changeDeviceState(flag);
+		
+
+		return rootView;
+	}
+	
+	private void populateSpinners(View rootView){
 		ch1Function = (Spinner) rootView.findViewById(R.id.hp54602b_ch1_function);
 		ch2Function = (Spinner) rootView.findViewById(R.id.hp54602b_ch2_function);
 		ch1Coupling = (Spinner) rootView.findViewById(R.id.hp54602b_ch1_coupling);
@@ -51,7 +81,27 @@ public class HP54602bFragment extends Fragment{
 		ch1Probe.setAdapter(probeAdapter);
 		ch2Probe.setAdapter(probeAdapter);
 		triggerSource.setAdapter(triggerSourceAdapter);
-
-		return rootView;
+	}
+	
+	private void changeDeviceState(boolean State){
+		ch1Function.setEnabled(State);
+		ch2Function.setEnabled(State);
+		ch1Coupling.setEnabled(State);
+		ch2Coupling.setEnabled(State);
+		ch1Probe.setEnabled(State);
+		ch2Probe.setEnabled(State);
+		triggerSource.setEnabled(State);
+		
+		ch1Range.setEnabled(State);
+		ch1Position.setEnabled(State);
+		ch2Range.setEnabled(State);
+		ch2Position.setEnabled(State);
+		triggerLvl.setEnabled(State);
+		timeRange.setEnabled(State);
+		timeDelay.setEnabled(State);
+		ch1Enabler.setEnabled(State);
+		ch2Enabler.setEnabled(State);
+		autoset.setEnabled(State);
+		configButton.setEnabled(State);
 	}
 }
