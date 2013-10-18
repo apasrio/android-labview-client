@@ -1,8 +1,10 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
+import roboguice.RoboGuice;
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,40 +15,40 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class HP34401aFragment extends Fragment{
+public class HP34401aFragment extends RoboFragment{
 	
-	private Spinner function, resolution, triggerSource;
-	private EditText manualRange;
-	private TextView measure;
-	private ToggleButton autozero, autorange;
-	private Button configButton;
+	private boolean status;
+	private View rootView;
+	
+	@InjectView(R.id.hp34401a_manual_range) EditText manualRange; 
+	@InjectView(R.id.hp34401a_autozero) ToggleButton autozero;
+	@InjectView(R.id.hp34401a_autorange) ToggleButton autorange;
+	@InjectView(R.id.hp34401a_measure) TextView measure;
+	@InjectView(R.id.hp34401a_config_button) Button configButton;
+	@InjectView(R.id.hp34401a_function) Spinner function;
+	@InjectView(R.id.hp34401a_resolution) Spinner resolution;
+	@InjectView(R.id.hp34401a_trigger_src) Spinner triggerSource;
+	
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){
 		
-		View rootView = inflater.inflate(R.layout.fragment_hp34401a,
-				container, false);
-		// Instance of Views
-		manualRange = (EditText) rootView.findViewById(R.id.hp34401a_manual_range);
-		measure = (TextView) rootView.findViewById(R.id.hp34401a_measure);
-		autozero = (ToggleButton) rootView.findViewById(R.id.hp34401a_autozero);
-		autorange = (ToggleButton) rootView.findViewById(R.id.hp34401a_autorange);
-		configButton = (Button) rootView.findViewById(R.id.hp34401a_config_button);
-		
+		rootView = inflater.inflate(R.layout.fragment_hp34401a,
+				container, false);		
 		// Getting arguments
-		boolean flag = getArguments().getBoolean(Constants.HP34401A_STATUS);
-		
-		// Let's populate spinners
-		populateSpinners(rootView);
-		changeDeviceState(flag);
-		
+		status = getArguments().getBoolean(Constants.HP34401A_STATUS);		
 		return rootView;
 	}
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		changeDeviceState(status);		
+		// Let's populate spinners
+		populateSpinners(rootView);
+	}
+	
 	private void populateSpinners(View rootView){
-		function = (Spinner) rootView.findViewById(R.id.hp34401a_function);
-		resolution = (Spinner) rootView.findViewById(R.id.hp34401a_resolution);
-		triggerSource = (Spinner) rootView.findViewById(R.id.hp34401a_trigger_src);
 		
 		ArrayAdapter<CharSequence> functionAdapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.dmm_functions, android.R.layout.simple_spinner_item);

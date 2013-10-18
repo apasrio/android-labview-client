@@ -1,8 +1,9 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,29 +12,38 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class HP33120aFragment extends Fragment{
+public class HP33120aFragment extends RoboFragment{	
 	
-	private Spinner wfmShape, unit;
-	private EditText frequency, amplitude, offset, dutyCycle;
-	private Button configButton;
+	private boolean status;
+	private View rootView;
+	
+	@InjectView(R.id.hp33120a_amplitude) EditText amplitude;
+	@InjectView(R.id.hp33120a_frequency) EditText frequency;
+	@InjectView(R.id.hp33120a_offset) EditText offset;
+	@InjectView(R.id.hp33120a_duty_cycle) EditText dutyCycle;
+	@InjectView(R.id.hp33120aWaveform) Spinner wfmShape;
+	@InjectView(R.id.hp33120aUnit) Spinner unit;
+	@InjectView(R.id.hp33120a_configButton) Button configButton;
 	
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){		
-		View rootView = inflater.inflate(R.layout.fragment_hp33120a,
+		rootView = inflater.inflate(R.layout.fragment_hp33120a,
 				container, false);
-		frequency = (EditText) rootView.findViewById(R.id.hp33120a_frequency);
-		amplitude = (EditText) rootView.findViewById(R.id.hp33120a_amplitude);
-		offset = (EditText) rootView.findViewById(R.id.hp33120a_offset);
-		dutyCycle = (EditText) rootView.findViewById(R.id.hp33120a_duty_cycle);
-		configButton = (Button) rootView.findViewById(R.id.hp33120a_configButton);
 		// Getting arguments
-		boolean flag = getArguments().getBoolean(Constants.HP33120A_STATUS);
+		status = getArguments().getBoolean(Constants.HP33120A_STATUS);
 		// Let's populate spinners
-		populateSpinners(rootView);
-		changeDeviceState(flag);
+		populateSpinners(rootView);		
 		
 		return rootView;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		changeDeviceState(status);		
+		// Let's populate spinners
+		populateSpinners(rootView);
 	}
 	
 	private void populateSpinners(View rootView){

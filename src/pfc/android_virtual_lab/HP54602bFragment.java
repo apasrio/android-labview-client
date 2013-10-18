@@ -1,8 +1,9 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,52 +13,49 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
-public class HP54602bFragment extends Fragment{
+public class HP54602bFragment extends RoboFragment{
 	
-	private Spinner ch1Function, ch2Function, ch1Coupling, ch2Coupling, ch1Probe, ch2Probe;
-	private Spinner triggerSource;
-	private EditText ch1Range, ch2Range, ch1Position, ch2Position, triggerLvl, timeRange, timeDelay;
-	private ToggleButton ch1Enabler, ch2Enabler, autoset;
-	private Button configButton;
+	private boolean status;
+	private View rootView;
+	
+	@InjectView(R.id.hp54602b_ch1_range) EditText ch1Range;
+	@InjectView(R.id.hp54602b_ch2_range) EditText ch2Range;
+	@InjectView(R.id.hp54602b_ch1_position) EditText ch1Position;
+	@InjectView(R.id.hp54602b_ch2_position) EditText ch2Position;
+	@InjectView(R.id.hpt54602b_trigger_lvl) EditText triggerLvl;
+	@InjectView(R.id.hp54602b_time_range) EditText timeRange;
+	@InjectView(R.id.hp54602b_time_delay) EditText timeDelay;
+	@InjectView(R.id.hp54602b_ch1_button) ToggleButton ch1Enabler;
+	@InjectView(R.id.hp54602b_ch2_button) ToggleButton ch2Enabler;
+	@InjectView(R.id.hp54602b_autoset) ToggleButton autoset;
+	@InjectView(R.id.hp54602b_config_button) Button configButton;
+	@InjectView(R.id.hp54602b_ch1_function) Spinner ch1Function;
+	@InjectView(R.id.hp54602b_ch2_function) Spinner ch2Function;
+	@InjectView(R.id.hp54602b_ch1_coupling) Spinner ch1Coupling;
+	@InjectView(R.id.hp54602b_ch2_coupling) Spinner ch2Coupling;
+	@InjectView(R.id.hp54602b_ch1_probe) Spinner ch1Probe;
+	@InjectView(R.id.hp54602b_ch2_probe) Spinner ch2Probe;
+	@InjectView(R.id.hp54602b_trigger_src) Spinner triggerSource;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){
 		
-		View rootView = inflater.inflate(R.layout.fragment_hp54602b,
-				container, false);
-		
-		ch1Range = (EditText) rootView.findViewById(R.id.hp54602b_ch1_range);
-		ch1Position = (EditText) rootView.findViewById(R.id.hp54602b_ch1_position);
-		ch2Range = (EditText) rootView.findViewById(R.id.hp54602b_ch2_range);
-		ch2Position = (EditText) rootView.findViewById(R.id.hp54602b_ch2_position);
-		triggerLvl = (EditText) rootView.findViewById(R.id.hpt54602b_trigger_lvl);
-		timeRange = (EditText) rootView.findViewById(R.id.hp54602b_time_range);
-		timeDelay = (EditText) rootView.findViewById(R.id.hp54602b_time_delay);
-		ch1Enabler = (ToggleButton) rootView.findViewById(R.id.hp54602b_ch1_button);
-		ch2Enabler = (ToggleButton) rootView.findViewById(R.id.hp54602b_ch2_button);
-		autoset = (ToggleButton) rootView.findViewById(R.id.hp54602b_autoset);
-		configButton = (Button) rootView.findViewById(R.id.hp54602b_config_button);
-		
+		rootView = inflater.inflate(R.layout.fragment_hp54602b,
+				container, false);		
 		// Getting arguments
-		boolean flag = getArguments().getBoolean(Constants.HP54602B_STATUS);
-
-		// Let's populate spinners
-		populateSpinners(rootView);
-		changeDeviceState(flag);
-		
-
+		status = getArguments().getBoolean(Constants.HP54602B_STATUS);
 		return rootView;
 	}
 	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		changeDeviceState(status);		
+		// Let's populate spinners
+		populateSpinners(rootView);
+	}
+	
 	private void populateSpinners(View rootView){
-		ch1Function = (Spinner) rootView.findViewById(R.id.hp54602b_ch1_function);
-		ch2Function = (Spinner) rootView.findViewById(R.id.hp54602b_ch2_function);
-		ch1Coupling = (Spinner) rootView.findViewById(R.id.hp54602b_ch1_coupling);
-		ch2Coupling = (Spinner) rootView.findViewById(R.id.hp54602b_ch2_coupling);
-		ch1Probe = (Spinner) rootView.findViewById(R.id.hp54602b_ch1_probe);
-		ch2Probe = (Spinner) rootView.findViewById(R.id.hp54602b_ch2_probe);
-		triggerSource = (Spinner) rootView.findViewById(R.id.hp54602b_trigger_src);
-
 		ArrayAdapter<CharSequence> functionAdapter = ArrayAdapter.createFromResource(getActivity(),
 				R.array.oscilloscope_functions, android.R.layout.simple_spinner_item);
 		ArrayAdapter<CharSequence> couplingAdapter = ArrayAdapter.createFromResource(getActivity(),

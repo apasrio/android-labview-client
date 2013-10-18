@@ -1,8 +1,9 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class AG33120aFragment extends Fragment{
-	
-	private Spinner wfmShape, unit;
-	private EditText frequency, amplitude, offset, rampSymmetry, dutyCycleSq, dutyCyclePuls;
-	private Button configButton;
+public class AG33120aFragment extends RoboFragment{
+		
 	private View rootView;
+	private boolean status;
+	
+	@InjectView(R.id.ag33220WfmShape) Spinner wfmShape;
+	@InjectView(R.id.ag33220Unit) Spinner unit;
+	@InjectView(R.id.ag33220a_frequency) EditText frequency;
+	@InjectView(R.id.ag33220a_amplitude) EditText amplitude;
+	@InjectView(R.id.ag33220a_offset) EditText offset;
+	@InjectView(R.id.ag33220a_ramp_symmetry) EditText rampSymmetry;
+	@InjectView(R.id.ag33220a_duty_cycle_sq) EditText dutyCycleSq;
+	@InjectView(R.id.ag33220a_duty_cycle_puls) EditText dutyCyclePuls;
+	@InjectView(R.id.ag33220a_config_button) Button configButton;
+	
 	
 	public AG33120aFragment(){
 		
@@ -28,27 +38,19 @@ public class AG33120aFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_ag33220a,
 				container, false);
 		// Getting arguments
-		boolean flag = getArguments().getBoolean(Constants.AG33220A_STATUS);
-		// References to views
-		frequency = (EditText) rootView.findViewById(R.id.ag33220a_frequency);
-		amplitude = (EditText) rootView.findViewById(R.id.ag33220a_amplitude);
-		offset = (EditText) rootView.findViewById(R.id.ag33220a_offset);
-		rampSymmetry = (EditText) rootView.findViewById(R.id.ag33220a_ramp_symmetry);
-		dutyCycleSq = (EditText) rootView.findViewById(R.id.ag33220a_duty_cycle_sq);
-		dutyCyclePuls = (EditText) rootView.findViewById(R.id.ag33220a_duty_cycle_puls);
-		configButton = (Button) rootView.findViewById(R.id.ag33220a_config_button);
-		
-		// Let's populate spinners
-		populateSpinners(rootView);
-		changeDeviceState(flag);
-		
-		
+		status = getArguments().getBoolean(Constants.AG33220A_STATUS);			
 		return rootView;
 	}
 	
-	private void populateSpinners(View rootView){
-		wfmShape = (Spinner) rootView.findViewById(R.id.ag33220WfmShape);
-		unit = (Spinner) rootView.findViewById(R.id.ag33220Unit);
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState){
+		super.onActivityCreated(savedInstanceState);
+		changeDeviceState(status);		
+		// Let's populate spinners
+		populateSpinners(rootView);
+	}
+	
+	private void populateSpinners(View rootView){		
 		
 		ArrayAdapter<CharSequence> waveformAdapter = ArrayAdapter.createFromResource(getActivity(),
 		        R.array.waveform_shape, android.R.layout.simple_spinner_item);

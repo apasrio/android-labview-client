@@ -3,10 +3,9 @@ package pfc.android_virtual_lab;
 import java.util.Locale;
 
 import pfc.android_virtual_lab.util.Constants;
-
+import roboguice.activity.RoboFragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class DevicesActivity extends FragmentActivity {
+public class DevicesActivity extends RoboFragmentActivity {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
