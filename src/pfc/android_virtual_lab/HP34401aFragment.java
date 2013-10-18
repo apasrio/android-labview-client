@@ -5,9 +5,11 @@ import roboguice.RoboGuice;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ public class HP34401aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
+	private static final String TAG = "HP34401aFragment";
 	
 	@InjectView(R.id.hp34401a_manual_range) EditText manualRange; 
 	@InjectView(R.id.hp34401a_autozero) ToggleButton autozero;
@@ -46,6 +49,12 @@ public class HP34401aFragment extends RoboFragment{
 		changeDeviceState(status);		
 		// Let's populate spinners
 		populateSpinners(rootView);
+		configButton.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {				
+				Log.d(TAG, "Do it! Button has been pressed");
+			}			
+		});
 	}
 	
 	private void populateSpinners(View rootView){

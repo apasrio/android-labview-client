@@ -4,9 +4,11 @@ import pfc.android_virtual_lab.util.Constants;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ public class HP33120aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
+	private static final String TAG = "HP33120aFragment";
 	
 	@InjectView(R.id.hp33120a_amplitude) EditText amplitude;
 	@InjectView(R.id.hp33120a_frequency) EditText frequency;
@@ -44,6 +47,12 @@ public class HP33120aFragment extends RoboFragment{
 		changeDeviceState(status);		
 		// Let's populate spinners
 		populateSpinners(rootView);
+		configButton.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {				
+				Log.d(TAG, "Do it! Button has been pressed");
+			}			
+		});
 	}
 	
 	private void populateSpinners(View rootView){
