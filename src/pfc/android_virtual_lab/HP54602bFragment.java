@@ -20,6 +20,7 @@ import android.widget.ToggleButton;
 public class HP54602bFragment extends RoboFragment{
 	
 	private static final String TAG = "HP54602bFragment";
+	private HP54602b hp54602b;
 	private boolean status;
 	private Context context;
 	private View rootView;
@@ -50,6 +51,8 @@ public class HP54602bFragment extends RoboFragment{
 				container, false);		
 		// Getting arguments
 		status = getArguments().getBoolean(Constants.HP54602B_STATUS);
+		if(status)
+			hp54602b = new HP54602b();
 		context = getActivity().getApplicationContext();
 		return rootView;
 	}
@@ -64,6 +67,9 @@ public class HP54602bFragment extends RoboFragment{
 			@Override
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
+				readFields();
+				hp54602b.setFrame();
+				Log.d(TAG, "Frame -> " + hp54602b.getFrame());
 				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
@@ -115,5 +121,25 @@ public class HP54602bFragment extends RoboFragment{
 		ch2Enabler.setEnabled(State);
 		autoset.setEnabled(State);
 		configButton.setEnabled(State);
+	}
+	
+	private void readFields(){
+		hp54602b.setCh1(ch1Enabler.isChecked());
+		hp54602b.setCh2(ch2Enabler.isChecked());
+		hp54602b.setCh1Function(ch1Function.getSelectedItemPosition());
+		hp54602b.setCh2Function(ch2Function.getSelectedItemPosition());
+		hp54602b.setCh1Coupling(ch1Coupling.getSelectedItemPosition());
+		hp54602b.setCh2Coupling(ch2Coupling.getSelectedItemPosition());
+		hp54602b.setCh1Probe(ch1Probe.getSelectedItemPosition());
+		hp54602b.setCh2Probe(ch2Probe.getSelectedItemPosition());
+		hp54602b.setTriggerSource(triggerSource.getSelectedItemPosition());
+		hp54602b.setCh1Range(Float.valueOf(ch1Range.getText().toString()));
+		hp54602b.setCh2Range(Float.valueOf(ch2Range.getText().toString()));
+		hp54602b.setCh1Pos(Float.valueOf(ch1Position.getText().toString()));
+		hp54602b.setCh2Pos(Float.valueOf(ch2Position.getText().toString()));
+		hp54602b.setTriggerLevel(Float.valueOf(triggerLvl.getText().toString()));
+		hp54602b.setTimeDelay(Float.valueOf(timeDelay.getText().toString()));
+		hp54602b.setTimeRange(Float.valueOf(timeRange.getText().toString()));
+		hp54602b.setAutoset(autoset.isChecked());
 	}
 }

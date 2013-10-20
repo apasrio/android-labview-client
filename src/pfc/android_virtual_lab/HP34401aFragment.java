@@ -22,6 +22,7 @@ public class HP34401aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
+	private HP34401a hp34401a;
 	private Context context;
 	private static final String TAG = "HP34401aFragment";
 	
@@ -43,6 +44,9 @@ public class HP34401aFragment extends RoboFragment{
 		// Getting arguments
 		status = getArguments().getBoolean(Constants.HP34401A_STATUS);
 		
+		if(status)
+			hp34401a = new HP34401a();
+		
 		context = getActivity().getApplicationContext();
 		return rootView;
 	}
@@ -58,6 +62,9 @@ public class HP34401aFragment extends RoboFragment{
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
 				// TODO: Read fields an send request to server
+				readFields();
+				hp34401a.setFrame();
+				Log.d(TAG, "Frame-> " + hp34401a.getFrame());
 				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
@@ -91,5 +98,14 @@ public class HP34401aFragment extends RoboFragment{
 		function.setEnabled(state);
 		resolution.setEnabled(state);
 		triggerSource.setEnabled(state);
+	}
+	
+	private void readFields(){
+		hp34401a.setAutoRange(autorange.isChecked());
+		hp34401a.setAutoZero(autozero.isChecked());
+		hp34401a.setFunction(function.getSelectedItemPosition());
+		hp34401a.setRange(Float.valueOf(manualRange.getText().toString()));
+		hp34401a.setResolution(resolution.getSelectedItemPosition());
+		hp34401a.setTriggerSource(triggerSource.getSelectedItemPosition());
 	}
 }
