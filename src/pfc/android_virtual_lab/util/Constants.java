@@ -7,6 +7,8 @@ public class Constants {
 	// Messages and Types
 	public final static String AVAILABLE_FIELD = "AVAILABLE_FIELD";
 	public final static int AVAILABLE_DEVICES_QUERY = 6;
+	public final static int ECHO_TYPE = 0;
+	public final static String ECHO_TEST_MSG = "JUST_A_TEST_MESSAGE";
 	
 	// Dispatcher Strings
 	public final static String ESTABLISH_CONNECTION = "EstablishConnection";

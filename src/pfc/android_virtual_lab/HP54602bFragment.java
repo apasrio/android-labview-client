@@ -1,8 +1,10 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
+import pfc.android_virtual_lab.util.TcpClientBidirectComm;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ public class HP54602bFragment extends RoboFragment{
 	
 	private static final String TAG = "HP54602bFragment";
 	private boolean status;
+	private Context context;
 	private View rootView;
 	
 	@InjectView(R.id.hp54602b_ch1_range) EditText ch1Range;
@@ -47,6 +50,7 @@ public class HP54602bFragment extends RoboFragment{
 				container, false);		
 		// Getting arguments
 		status = getArguments().getBoolean(Constants.HP54602B_STATUS);
+		context = getActivity().getApplicationContext();
 		return rootView;
 	}
 	
@@ -60,6 +64,7 @@ public class HP54602bFragment extends RoboFragment{
 			@Override
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
+				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
 	}

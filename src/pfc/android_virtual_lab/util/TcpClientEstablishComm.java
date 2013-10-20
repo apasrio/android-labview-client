@@ -8,35 +8,39 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import pfc.android_virtual_lab.DevicesActivity;
-import pfc.android_virtual_lab.Globals;
+import pfc.android_virtual_lab.MyApp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
-public class TCPClient extends AsyncTask<String, Integer, Integer>{
+public class TcpClientEstablishComm extends AsyncTask<String, Integer, Integer>{
 	
 	private static final String TAG = "TcpCommunication";
 	//Socket parameters
-	private static Socket clientSocket;
+	// private static Socket clientSocket;
 	static int receivedMessageLength, receivedMessageType;
 	// Handling the DataStreams
-	static DataOutputStream outToServer; 
-	static BufferedReader inFromServer; 
+	private DataOutputStream outToServer; 
+	private BufferedReader inFromServer; 
 	private TextView errMsg;
 	private Context context;
 	private boolean ag33220aFlag, hp33120aFlag, hp34401aFlag, hp54602bFlag;
+	private MyApp myApp;
 	
-	public TCPClient(Context context, TextView errMsg){
+	public TcpClientEstablishComm(Context context, TextView errMsg){
 		this.errMsg = errMsg;
 		this.context = context;
+		myApp = (MyApp)context.getApplicationContext();
+		this.outToServer = myApp.getOutToServer();
+		this.inFromServer = myApp.getInFromServer();
 	}	
 	
 	/*
 	 * Method to send a message to the server and wait for an answer
 	 */
-	public static String[] bidirectComm(String message, Integer messageType) throws Exception{
+	public String[] bidirectComm(String message, Integer messageType) throws Exception{
 		// Building the Header with the lenght of the message to send
 		// Needed Variables		
 		String headerToSend, receivedHeader, receivedMessage ,headerToPad = "";
@@ -65,7 +69,7 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	/*
 	 * Method to establish communication with the server side. (Changing port system)
 	 */
-	public static int establishComm(String IP) throws IOException{	
+	public int establishComm(String IP) throws IOException{	
 		int newPort;
 		String receivedHeader, receivedMessage;
 		receivedHeader = readHeader(inFromServer);
@@ -73,14 +77,16 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 		if(receivedMessageType==3){
 			// Change communication to received port
 			receivedMessage = readMessage(receivedMessageLength, inFromServer);
-			getClientSocket().close();	
+			myApp.getClientSocket().close();	
 			newPort = Integer.parseInt(receivedMessage);
 			System.out.println("New port at: "+newPort);
 			// Open a new socket with an assigned port
-			TCPClient.clientSocket = new Socket(IP, newPort);
+			myApp.setClientSocket(new Socket(IP, newPort));
 
-			outToServer = new DataOutputStream(getClientSocket().getOutputStream());
-			inFromServer = new BufferedReader(new InputStreamReader(getClientSocket().getInputStream()));			
+			myApp.setOutToServer(new DataOutputStream(myApp.getClientSocket().getOutputStream()));
+			myApp.setInFromServer(new BufferedReader(new InputStreamReader(myApp.getClientSocket().getInputStream())));
+			this.outToServer = myApp.getOutToServer();
+			this.inFromServer = myApp.getInFromServer();
 			receivedHeader = readHeader(inFromServer);
 			decodeHeader(receivedHeader);
 			// Read Server Response in order to know its status
@@ -167,27 +173,30 @@ public class TCPClient extends AsyncTask<String, Integer, Integer>{
 	}
 
 
-	public static void close() throws IOException {
+	public void close() throws IOException {
 		// TODO Auto-generated method stub
-		getClientSocket().close();
+		myApp.getClientSocket().close();
 	}
-
+	/*
 	public static Socket getClientSocket() {
 		return clientSocket;
 	}
 
 	public void setClientSocket(Socket clientSocket) {
 		this.clientSocket = clientSocket;
-	}
+	}*/
 	
 	@Override
 	protected Integer doInBackground(String... params) {	
 		int code = 0;
 		
 		try {
-			TCPClient.clientSocket = new Socket(Constants.SocketIp, Constants.SocketPort);
-			this.outToServer = new DataOutputStream(getClientSocket().getOutputStream());
-			this.inFromServer = new BufferedReader(new InputStreamReader(getClientSocket().getInputStream()));
+			myApp.setClientSocket(new Socket(Constants.SocketIp, Constants.SocketPort));
+			myApp.setOutToServer(new DataOutputStream(myApp.getClientSocket().getOutputStream()));
+			myApp.setInFromServer(new BufferedReader(new InputStreamReader(myApp.getClientSocket().getInputStream())));
+			
+			inFromServer = myApp.getInFromServer();
+			outToServer = myApp.getOutToServer();
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

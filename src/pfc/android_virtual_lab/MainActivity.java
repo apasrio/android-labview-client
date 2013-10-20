@@ -1,7 +1,7 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
-import pfc.android_virtual_lab.util.TCPClient;
+import pfc.android_virtual_lab.util.TcpClientEstablishComm;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
 	private final static String TAG = "MainActivity";
 	private TextView errorMsg;
 	
-	TCPClient clientSocket = null;
+	TcpClientEstablishComm clientSocket = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 		connectButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {								
-				new TCPClient(getApplicationContext(),errorMsg).execute(Constants.ESTABLISH_CONNECTION);				
+				new TcpClientEstablishComm(getApplicationContext(),errorMsg).execute(Constants.ESTABLISH_CONNECTION);				
 			}
 		});
 	}	

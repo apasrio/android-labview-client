@@ -1,15 +1,16 @@
 package pfc.android_virtual_lab;
 
 import pfc.android_virtual_lab.util.Constants;
-import roboguice.RoboGuice;
+import pfc.android_virtual_lab.util.TcpClientBidirectComm;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ public class HP34401aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
+	private Context context;
 	private static final String TAG = "HP34401aFragment";
 	
 	@InjectView(R.id.hp34401a_manual_range) EditText manualRange; 
@@ -39,7 +41,9 @@ public class HP34401aFragment extends RoboFragment{
 		rootView = inflater.inflate(R.layout.fragment_hp34401a,
 				container, false);		
 		// Getting arguments
-		status = getArguments().getBoolean(Constants.HP34401A_STATUS);		
+		status = getArguments().getBoolean(Constants.HP34401A_STATUS);
+		
+		context = getActivity().getApplicationContext();
 		return rootView;
 	}
 	
@@ -53,6 +57,7 @@ public class HP34401aFragment extends RoboFragment{
 			@Override
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
+				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
 	}
