@@ -57,6 +57,7 @@ public class HP34401aFragment extends RoboFragment{
 			@Override
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
+				// TODO: Read fields an send request to server
 				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});

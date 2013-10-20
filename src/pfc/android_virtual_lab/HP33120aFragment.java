@@ -20,8 +20,9 @@ public class HP33120aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
-	private static final String TAG = "HP33120aFragment";
 	private Context context;
+	private HP33120a hp33120a;
+	private static final String TAG = "HP33120aFragment";
 	
 	@InjectView(R.id.hp33120a_amplitude) EditText amplitude;
 	@InjectView(R.id.hp33120a_frequency) EditText frequency;
@@ -38,6 +39,8 @@ public class HP33120aFragment extends RoboFragment{
 				container, false);
 		// Getting arguments
 		status = getArguments().getBoolean(Constants.HP33120A_STATUS);
+		if(status)
+			hp33120a = new HP33120a();
 		// Let's populate spinners
 		populateSpinners(rootView);	
 		context = getActivity().getApplicationContext();
@@ -55,6 +58,9 @@ public class HP33120aFragment extends RoboFragment{
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
 				//TCPClient.bidirectComm(message, messageType)
+				readFields();
+				hp33120a.setFrame();
+				Log.d(TAG, "Frame -> " + hp33120a.getFrame());
 				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
@@ -86,5 +92,14 @@ public class HP33120aFragment extends RoboFragment{
 		offset.setEnabled(state);
 		dutyCycle.setEnabled(state);
 		configButton.setEnabled(state);
+	}
+	
+	private void readFields(){
+		hp33120a.setSignalShape(wfmShape.getSelectedItemPosition());
+		hp33120a.setUnit(unit.getSelectedItemPosition());
+		hp33120a.setSignalFreq(Float.valueOf(frequency.getText().toString()));
+		hp33120a.setSignalAmp(Float.valueOf(amplitude.getText().toString()));
+		hp33120a.setSignalOff(Float.valueOf(offset.getText().toString()));
+		hp33120a.setDutyCycleSq(Integer.valueOf(dutyCycle.getText().toString()));
 	}
 }

@@ -21,6 +21,7 @@ public class AG33120aFragment extends RoboFragment{
 	private View rootView;
 	private boolean status;
 	private Context context;
+	private AG33220a ag33220a;
 	private static final String TAG = "AG33120aFragment";
 	
 	@InjectView(R.id.ag33220WfmShape) Spinner wfmShape;
@@ -44,7 +45,9 @@ public class AG33120aFragment extends RoboFragment{
 		rootView = inflater.inflate(R.layout.fragment_ag33220a,
 				container, false);
 		// Getting arguments
-		status = getArguments().getBoolean(Constants.AG33220A_STATUS);			
+		status = getArguments().getBoolean(Constants.AG33220A_STATUS);	
+		if(status)
+			ag33220a = new AG33220a();
 		context = getActivity().getApplicationContext();
 		return rootView;
 	}
@@ -59,6 +62,9 @@ public class AG33120aFragment extends RoboFragment{
 			@Override
 			public void onClick(View v) {				
 				Log.d(TAG, "Do it! Button has been pressed");
+				readFields();
+				ag33220a.setFrame();
+				Log.d(TAG, "Frame -> " + ag33220a.getFrame());
 				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
@@ -90,5 +96,16 @@ public class AG33120aFragment extends RoboFragment{
 		dutyCycleSq.setEnabled(state);
 		dutyCyclePuls.setEnabled(state);
 		configButton.setEnabled(state);
+	}
+	
+	private void readFields(){
+		ag33220a.setSignalShape(wfmShape.getSelectedItemPosition());
+		ag33220a.setUnit(unit.getSelectedItemPosition());
+		ag33220a.setSignalFreq(Float.valueOf(frequency.getText().toString()));
+		ag33220a.setSignalAmp(Float.valueOf(amplitude.getText().toString()));
+		ag33220a.setSignalOff(Float.valueOf(offset.getText().toString()));
+		ag33220a.setRampSymm(Integer.valueOf(rampSymmetry.getText().toString()));
+		ag33220a.setDutyCycleSq(Integer.valueOf(dutyCycleSq.getText().toString()));
+		ag33220a.setDutyCyclePuls(Integer.valueOf(dutyCyclePuls.getText().toString()));
 	}
 }

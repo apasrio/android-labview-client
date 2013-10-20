@@ -44,10 +44,17 @@ public class HP33120a {
 		// it is no necessary because we are generating a Sine
 		this.dutyCycleSq = 50;
 		
-		// Modulation default fields (some of them are not needed) 
-		// TODO: Initialize modulation fields
-		this.modType = 0;
-		this.deviationFM = 100; // 100Hz 
+		// Modulation default fields (some of them are not needed) 		
+		this.modType = 0;		// AM
+		this.modWfmShape = 0;	// Sine
+		this.modFreq = 100;		// 100Hz
+		this.amDepth = 100;		// %
+		this.deviationFM = 100; // 100Hz
+		this.hopFrequency = 100;// 100Hz	
+		this.burstRate = 100;	// 100Hz
+		this.burstCount = 1;	// 1 time
+		this.burstPhase = 0;	// 0 Degrees
+		
 		
 		/*
 		 * ModulatingWaveform_Shape_Value 			-> 			Modulating Waveform Shape

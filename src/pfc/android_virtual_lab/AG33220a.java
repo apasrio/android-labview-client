@@ -30,6 +30,17 @@ public class AG33220a {
 		
 		// Modulation fields 
 		// TODO: Initialize modulation fields
+		this.modType = 0;			// AM
+		this.modWfmShape = 0;		// Sine
+		this.modFreq = 1000;		// 1000Hz
+		this.amDepth = 50;			// 50%
+		this.deviationFM = 50;		// 50Hz
+		this.hopFrequency = 500;	// 500Hz
+		this.internalDeviation = 0;	// 0%
+		this.phaseDeviation = 0;	// 0 Degrees	
+		this.burstRate = 100;		// 100Hz
+		this.burstCount = 1;		// 1 time
+		this.burstPhase = 0;		// 0 Degrees
 		
 		// Frame Initialization to null
 		this.frame = "";
