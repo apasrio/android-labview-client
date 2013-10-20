@@ -110,5 +110,10 @@
         <item>Channel 2</item>
     </string-array>
         <string name="do_it">Do it!</string>
+        <string name="thousand">1000</string>
+        <string name="one">1</string>
+        <string name="zero">0</string>
+        <string name="fifty">50</string>
+        <string name="hundred">100</string>
 
 </resources>

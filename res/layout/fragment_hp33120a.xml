@@ -62,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" >
+            android:inputType="numberDecimal"
+            android:text="@string/thousand" >
 
             <requestFocus />
         </EditText>
@@ -86,7 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:text="@string/one" />
 
     </TableRow>
 
@@ -107,7 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:text="@string/zero" />
 
     </TableRow>
 
@@ -128,7 +131,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:text="@string/fifty" />
 
     </TableRow>
 

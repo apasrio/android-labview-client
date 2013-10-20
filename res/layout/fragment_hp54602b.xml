@@ -149,7 +149,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" >
+                android:inputType="numberDecimal"
+                android:text="@string/one" >
 
                 <requestFocus />
             </EditText>
@@ -160,7 +161,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/one" />
+
         </TableRow>
 
         <TableRow
@@ -180,7 +183,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/zero" />
 
             <EditText
                 android:id="@+id/hp54602b_ch2_position"
@@ -188,7 +192,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/zero" />
+
         </TableRow>
 
         <TableRow
@@ -242,7 +248,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/zero" />
+
         </TableRow>
 
         <TableRow
@@ -263,7 +271,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/one" />
+
         </TableRow>
 
         <TableRow
@@ -284,7 +294,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:text="@string/one" />
 
         </TableRow>
 
