@@ -140,5 +140,17 @@ public class TcpClientBidirectComm extends AsyncTask<String, Integer, String[]>{
 		System.out.println("Lenght of received header is: "+ receivedHeader.length());
 		return receivedHeader;
 	}
+	
+	private void receiverDecider(String typeOfReceivedMessage, String receivedMessage){
+		int type;
+		type = Integer.valueOf(typeOfReceivedMessage);
+		switch(type){
+		case Constants.CLOSING_CONNECTION:
+			// Closing sockets
+			break;
+		case Constants.HP33120A_SUCCESSFUL_QUERY:
+			// Request to HP33120a has been successful
+		}
+	}
 
 }
