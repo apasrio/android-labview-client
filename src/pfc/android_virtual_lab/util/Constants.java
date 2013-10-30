@@ -16,6 +16,7 @@ public class Constants {
 	public final static int HP34401A_QUERY = 30;
 	public final static int HP34401A_SUCCESSFUL_QUERY = 31;
 	public final static int HP34401A_ERRONEOUS_QUERY = 33;
+	public final static int HP54602B_QUERY = 40;
 	public final static int HP54602B_SUCCESSFUL_QUERY = 41;
 	public final static int HP54602B_ERRONEOUS_QUERY = 43;
 	public final static String ECHO_TEST_MSG = "JUST_A_TEST_MESSAGE";

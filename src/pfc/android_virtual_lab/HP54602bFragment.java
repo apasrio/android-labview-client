@@ -22,7 +22,7 @@ public class HP54602bFragment extends RoboFragment{
 	private static final String TAG = "HP54602bFragment";
 	private HP54602b hp54602b;
 	private boolean status;
-	private Context context;
+	private Context applicationContext, activityContext;
 	private View rootView;
 	
 	@InjectView(R.id.hp54602b_ch1_range) EditText ch1Range;
@@ -53,7 +53,8 @@ public class HP54602bFragment extends RoboFragment{
 		status = getArguments().getBoolean(Constants.HP54602B_STATUS);
 		if(status)
 			hp54602b = new HP54602b();
-		context = getActivity().getApplicationContext();
+		applicationContext = getActivity().getApplicationContext();
+		activityContext = getActivity();
 		return rootView;
 	}
 	
@@ -70,7 +71,8 @@ public class HP54602bFragment extends RoboFragment{
 				readFields();
 				hp54602b.setFrame();
 				Log.d(TAG, "Frame -> " + hp54602b.getFrame());
-				// new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				new HP54602bComm(applicationContext, activityContext, rootView).execute(hp54602b.getFrame(),
+						String.valueOf(Constants.HP54602B_QUERY));
 			}			
 		});
 	}
