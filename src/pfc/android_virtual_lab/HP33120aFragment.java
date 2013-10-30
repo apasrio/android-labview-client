@@ -63,7 +63,8 @@ public class HP33120aFragment extends RoboFragment{
 				readFields();
 				hp33120a.setFrame();
 				Log.d(TAG, "Frame -> " + hp33120a.getFrame());
-				// new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				new HP33120aComm(applicationContext, activityContext, rootView).execute(hp33120a.getFrame(),
+						String.valueOf(Constants.HP33120A_QUERY));
 			}			
 		});
 	}

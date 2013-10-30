@@ -9,9 +9,10 @@ public class Constants {
 	public final static int AVAILABLE_DEVICES_QUERY = 6;
 	public final static int ECHO_TYPE = 0;
 	public final static int CLOSING_CONNECTION = 1;
+	public final static int HP33120A_QUERY = 10;
 	public final static int HP33120A_SUCCESSFUL_QUERY = 11;
-	public final static int AG33220A_SUCCESSFUL_QUERY = 21;
 	public final static int AG33220A_QUERY = 20;
+	public final static int AG33220A_SUCCESSFUL_QUERY = 21;
 	public final static int HP34401A_SUCCESSFUL_QUERY = 31;
 	public final static int HP34401A_ERRONEOUS_QUERY = 33;
 	public final static int HP54602B_SUCCESSFUL_QUERY = 41;
