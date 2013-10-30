@@ -9,7 +9,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class TcpClientBidirectComm extends AsyncTask<String, Integer, String[]>{	
+public class TcpClientBidirectComm {	
+	// extends AsyncTask<String, Integer, String[]>
 	static int receivedMessageLength, receivedMessageType;
 	private DataOutputStream outToServer; 
 	private BufferedReader inFromServer; 
@@ -22,7 +23,7 @@ public class TcpClientBidirectComm extends AsyncTask<String, Integer, String[]>{
 		this.outToServer = myApp.getOutToServer();
 		this.inFromServer = myApp.getInFromServer(); 
 	}
-
+	/*
 	@Override
 	protected String[] doInBackground(String... params) {		
 		String[] result = null;
@@ -51,7 +52,7 @@ public class TcpClientBidirectComm extends AsyncTask<String, Integer, String[]>{
 		} else {
 			Log.d(TAG, "There's been an error in communication process!");
 		}
-	}
+	}*/
 	
 	/*
 	 * Method to send a message to the server and wait for an answer

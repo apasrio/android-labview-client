@@ -70,7 +70,7 @@ public class HP54602bFragment extends RoboFragment{
 				readFields();
 				hp54602b.setFrame();
 				Log.d(TAG, "Frame -> " + hp54602b.getFrame());
-				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				// new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
 	}

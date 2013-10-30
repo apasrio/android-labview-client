@@ -20,7 +20,7 @@ public class AG33120aFragment extends RoboFragment{
 		
 	private View rootView;
 	private boolean status;
-	private Context context;
+	private Context applicationContext, activityContext;
 	private AG33220a ag33220a;
 	private static final String TAG = "AG33120aFragment";
 	
@@ -48,7 +48,8 @@ public class AG33120aFragment extends RoboFragment{
 		status = getArguments().getBoolean(Constants.AG33220A_STATUS);	
 		if(status)
 			ag33220a = new AG33220a();
-		context = getActivity().getApplicationContext();
+		applicationContext = getActivity().getApplicationContext();
+		activityContext = getActivity();
 		return rootView;
 	}
 	
@@ -65,7 +66,9 @@ public class AG33120aFragment extends RoboFragment{
 				readFields();
 				ag33220a.setFrame();
 				Log.d(TAG, "Frame -> " + ag33220a.getFrame());
-				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				// new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				new AG33120aComm(applicationContext, activityContext, rootView).execute(ag33220a.getFrame(),
+						String.valueOf(Constants.AG33220A_QUERY));
 			}			
 		});
 	}

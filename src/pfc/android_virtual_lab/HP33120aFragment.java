@@ -20,7 +20,7 @@ public class HP33120aFragment extends RoboFragment{
 	
 	private boolean status;
 	private View rootView;
-	private Context context;
+	private Context applicationContext, activityContext;
 	private HP33120a hp33120a;
 	private static final String TAG = "HP33120aFragment";
 	
@@ -43,7 +43,9 @@ public class HP33120aFragment extends RoboFragment{
 			hp33120a = new HP33120a();
 		// Let's populate spinners
 		populateSpinners(rootView);	
-		context = getActivity().getApplicationContext();
+		applicationContext = getActivity().getApplicationContext();
+		activityContext = getActivity();
+		
 		return rootView;
 	}
 	
@@ -61,7 +63,7 @@ public class HP33120aFragment extends RoboFragment{
 				readFields();
 				hp33120a.setFrame();
 				Log.d(TAG, "Frame -> " + hp33120a.getFrame());
-				new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
+				// new TcpClientBidirectComm(context).execute(Constants.ECHO_TEST_MSG, String.valueOf(Constants.ECHO_TYPE));
 			}			
 		});
 	}
