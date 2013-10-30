@@ -13,6 +13,7 @@ public class Constants {
 	public final static int HP33120A_SUCCESSFUL_QUERY = 11;
 	public final static int AG33220A_QUERY = 20;
 	public final static int AG33220A_SUCCESSFUL_QUERY = 21;
+	public final static int HP34401A_QUERY = 30;
 	public final static int HP34401A_SUCCESSFUL_QUERY = 31;
 	public final static int HP34401A_ERRONEOUS_QUERY = 33;
 	public final static int HP54602B_SUCCESSFUL_QUERY = 41;
