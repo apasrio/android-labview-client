@@ -78,6 +78,7 @@ public class HP54602bChartActivity extends RoboActivity{
 		trace2Renderer.setLineWidth(3);
 		renderer.addSeriesRenderer(trace1Renderer);
 		renderer.addSeriesRenderer(trace2Renderer);
+		renderer.setShowGrid(true);
 		dataset.addSeries(trace1);
 		dataset.addSeries(trace2);
 	}
