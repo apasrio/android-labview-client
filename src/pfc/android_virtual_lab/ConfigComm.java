@@ -36,6 +36,7 @@ public class ConfigComm extends AsyncTask<String, Integer, String[]>{
 		Log.d(TAG, "OnPostExecute method");
 		if(result != null){
 			decodeConfigResponse(result);
+			System.exit(0);
 		}else{
 			Log.d(TAG, "There has been an error in communication process!");
 		}
