@@ -115,5 +115,9 @@
         <string name="zero">0</string>
         <string name="fifty">50</string>
         <string name="hundred">100</string>
+        <string name="title_section_5">Chart</string>
+        <string name="function_1">Function 1:</string>
+        <string name="function_2">Function 2:</string>
+        <string name="chart_activity">HP54602b Chart</string>
 
 </resources>

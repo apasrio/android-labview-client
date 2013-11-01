@@ -1,7 +1,7 @@
 package pfc.android_virtual_lab.util;
 
 public class Constants {
-	public final static String SocketIp = "192.168.1.6";
+	public final static String SocketIp = "192.168.1.47";
 	public final static int SocketPort = 5020;
 	
 	// Messages and Types
@@ -30,4 +30,8 @@ public class Constants {
 	public final static String HP33120A_STATUS = "HP33120A_STATUS";
 	public final static String HP34401A_STATUS = "HP34401A_STATUS";
 	public final static String HP54602B_STATUS = "HP54602B_STATUS";
+	public final static String HP54602B_MEASURE_1 = "HP54602B_FUNCTION_1_MEASURE";
+	public final static String HP54602B_MEASURE_2 = "HP54602B_FUNCTION_2_MEASURE";
+	public final static String HP54602B_TRACE_1 = "HP54602B_TRACE_1";
+	public final static String HP54602B_TRACE_2 = "HP54602B_TRACE_2";
 }

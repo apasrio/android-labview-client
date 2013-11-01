@@ -177,14 +177,6 @@ public class TcpClientEstablishComm extends AsyncTask<String, Integer, Integer>{
 		// TODO Auto-generated method stub
 		myApp.getClientSocket().close();
 	}
-	/*
-	public static Socket getClientSocket() {
-		return clientSocket;
-	}
-
-	public void setClientSocket(Socket clientSocket) {
-		this.clientSocket = clientSocket;
-	}*/
 	
 	@Override
 	protected Integer doInBackground(String... params) {	
