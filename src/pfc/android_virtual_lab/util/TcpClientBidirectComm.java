@@ -148,9 +148,7 @@ public class TcpClientBidirectComm {
 		switch(type){
 		case Constants.CLOSING_CONNECTION:
 			// Closing sockets
-			break;
-		case Constants.HP33120A_SUCCESSFUL_QUERY:
-			// Request to HP33120a has been successful
+			break;		
 		}
 	}
 

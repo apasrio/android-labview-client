@@ -41,7 +41,7 @@ public class TcpClientEstablishComm extends AsyncTask<String, Integer, Integer>{
 	 * Method to send a message to the server and wait for an answer
 	 */
 	public String[] bidirectComm(String message, Integer messageType) throws Exception{
-		// Building the Header with the lenght of the message to send
+		// Building the Header with the length of the message to send
 		// Needed Variables		
 		String headerToSend, receivedHeader, receivedMessage ,headerToPad = "";
 		int messageLength;

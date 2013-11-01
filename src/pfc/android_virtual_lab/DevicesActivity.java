@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,7 +62,25 @@ public class DevicesActivity extends RoboFragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.devices, menu);
+		int groupId = 0;
+		int menuItemId = Constants.MENU_CLOSE_CONNECTION;
+		int menuItemOrder = Menu.NONE;
+		int menuItemText = R.string.menu_disconnect;
+		
+		// Create menu item and keep reference to it
+		MenuItem item = menu.add(groupId, menuItemId,
+				menuItemOrder, menuItemText);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		super.onOptionsItemSelected(item);
+		switch(item.getItemId()){
+		case Constants.MENU_CLOSE_CONNECTION:
+			new ConfigComm(this).execute(Constants.AVAILABLE_FIELD,String.valueOf(Constants.CLOSING_CONNECTION));
+		}
+		return false;		
 	}
 
 	/**

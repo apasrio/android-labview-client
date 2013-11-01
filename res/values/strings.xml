@@ -119,5 +119,6 @@
         <string name="function_1">Function 1:</string>
         <string name="function_2">Function 2:</string>
         <string name="chart_activity">HP54602b Chart</string>
+        <string name="menu_disconnect">Disconnect</string>
 
 </resources>

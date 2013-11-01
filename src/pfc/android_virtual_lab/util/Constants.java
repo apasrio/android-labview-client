@@ -4,6 +4,9 @@ public class Constants {
 	public final static String SocketIp = "192.168.1.47";
 	public final static int SocketPort = 5020;
 	
+	// Menu Integer Ids
+	public final static int MENU_CLOSE_CONNECTION = 1;
+	
 	// Messages and Types
 	public final static String AVAILABLE_FIELD = "AVAILABLE_FIELD";
 	public final static int AVAILABLE_DEVICES_QUERY = 6;
