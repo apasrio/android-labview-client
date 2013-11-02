@@ -79,6 +79,7 @@ public class HP54602bChartActivity extends RoboActivity{
 		renderer.addSeriesRenderer(trace1Renderer);
 		renderer.addSeriesRenderer(trace2Renderer);
 		renderer.setShowGrid(true);
+		renderer.setGridColor(Color.BLACK);
 		dataset.addSeries(trace1);
 		dataset.addSeries(trace2);
 	}
